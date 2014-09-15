@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)chrome-search://local-ntp/local-ntp.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="./konyTest_files/jquery.min.js"></script>
+    </head>
+    <body>
+    <style>
+    #vesselContent{
+        border: 1px solid gray;
+        width: 100%;
+        height: 600px;
+        position: relative;
+        overflow:scroll;
+    }
+    .vessel{
+        border: 1px solid gray;
+        background: #EFEFEF;
+        position: absolute;
+    }
+    </style>
+        <div id="vesselContent">
+        </div>
+        <input type="button" value="Test" onclick="alert($)">
+             <div class="vessel" id="vesselTemplete">
+                 <div class="id">
+                     <span class="hideMessage messageKey"> id: </span>
+                     <span class="hideMessage messageValue"> idval </span>
+                 </div>
+                 <div class="vesselLength">
+                     <span class="hideMessage messageKey"> vesselLength: </span>
+                     <span class="hideMessage messageValue"> vesselLengthVal </span>
+                 </div>
+                 <div class="start">
+                     <span class="hideMessage messageKey"> start: </span>
+                     <span class="hideMessage messageValue"> startVal </span>
+                 </div>
+                 <div class="position">
+                     <span class="hideMessage messageKey"> position: </span>
+                     <span class="hideMessage messageValue"> positionVal </span>
+                 </div>
+             </div>
+    
+    <script>
+        $(document.body).undelegate('.vessel', 'updateExistingVessel');
+        $(document.body).delegate('.vessel', 'updateExistingVessel', function(e, vesselObj){
+            var vessel = $(this);
+            vessel.attr('style', 
+                                 'width:'+ vesselObj.boa +'px;'+
+                                 'height:'+ vesselObj.vesselLength+'px;'+
+                                 'top:'+ vesselObj.position +'px;'+
+                                 'left:'+ vesselObj.start+'px;'
+                                 );
+        });
+
+        $(document.body).undelegate('#vesselContent', 'updateVessel');
+        $(document.body).delegate('#vesselContent', 'updateVessel', function(e, vesselObj){
+            if(vesselObj instanceof Array){
+                for(var index=0; index < vesselObj.length ; index++){
+                    var v = vesselObj[index];
+                    $('#vesselContent').trigger('updateVessel', v);
+                }
+                return;
+            }
+            var vesselId = vesselObj.id;
+            var existingVessel = $('#vesselContent').find('#'+ vesselId)>0;
+            if(existingVessel.length){
+                 existingVessel.trigger('updateExistingVessel', vesselObj);
+            } else {
+                var vesselTemplete = $('#vesselTemplete').clone().attr('id', vesselId);
+                for(var p in vesselObj){
+                    var attrDiv = vesselTemplete.find('.'+p);
+                    if(attrDiv.length>0){
+                        attrDiv.find('.messageValue').text(vesselObj[p]);
+                    }
+                }
+                $('#vesselContent').append(vesselTemplete);
+                vesselTemplete.trigger('updateExistingVessel', vesselObj);
+            }
+        });
+        </script>
+</body></html>
