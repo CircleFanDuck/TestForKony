@@ -1,7 +1,6 @@
-<!DOCTYPE html>
-<!-- saved from url=(0040)chrome-search://local-ntp/local-ntp.html -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <script src="./konyTest_files/jquery.min.js"></script>
+<html>
+    <head>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     </head>
     <body>
     <style>
@@ -18,28 +17,28 @@
         position: absolute;
     }
     </style>
-        <div id="vesselContent">
+        <div id=vesselContent>
         </div>
-        <input type="button" value="Test" onclick="alert($)">
-             <div class="vessel" id="vesselTemplete">
-                 <div class="id">
+        <input type=button value='Test' onclick='alert($)'/>
+             <div class=vessel id=vesselTemplete>
+                 <div class=id>
                      <span class="hideMessage messageKey"> id: </span>
                      <span class="hideMessage messageValue"> idval </span>
                  </div>
-                 <div class="vesselLength">
+                 <div class=vesselLength>
                      <span class="hideMessage messageKey"> vesselLength: </span>
                      <span class="hideMessage messageValue"> vesselLengthVal </span>
                  </div>
-                 <div class="start">
+                 <div class=start>
                      <span class="hideMessage messageKey"> start: </span>
                      <span class="hideMessage messageValue"> startVal </span>
                  </div>
-                 <div class="position">
+                 <div class=position>
                      <span class="hideMessage messageKey"> position: </span>
                      <span class="hideMessage messageValue"> positionVal </span>
                  </div>
              </div>
-    
+    </body>
     <script>
         $(document.body).undelegate('.vessel', 'updateExistingVessel');
         $(document.body).delegate('.vessel', 'updateExistingVessel', function(e, vesselObj){
@@ -78,4 +77,4 @@
             }
         });
         </script>
-</body></html>
+</html>
